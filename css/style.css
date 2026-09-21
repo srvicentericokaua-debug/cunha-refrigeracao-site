@@ -436,6 +436,7 @@ h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 700; }
   font-weight: 900;
   letter-spacing: -0.015em;
   margin-bottom: 28px;
+  text-wrap: balance;
 }
 .text-outline {
   color: transparent;
@@ -1035,6 +1036,16 @@ h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 700; }
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  opacity: 1;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+/* Hidden while the hero is in view — it already has its own WhatsApp CTA,
+   and on phones the hero's full-width buttons sit right where these fixed
+   buttons live. js/app.js toggles this via an IntersectionObserver. */
+.float-stack.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
 }
 
 .social-float {
@@ -1135,11 +1146,16 @@ h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 700; }
   .process-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
 
-  .hero-trust { flex-direction: column; align-items: center; gap: 16px; }
+  .hero-trust { flex-direction: column; align-items: center; gap: 20px; }
   .trust-div { display: none; }
-  .trust-item { text-align: left; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { justify-content: center; }
+  .trust-item { flex-direction: column; text-align: center; gap: 8px; }
+  .trust-label { text-align: center; }
+
+  /* Capped width (not full-stretch) keeps the button's right edge clear
+     of the fixed WhatsApp/Instagram buttons, which otherwise sit right on
+     top of it once this section scrolls near the bottom of the viewport. */
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { justify-content: center; width: 100%; max-width: 340px; }
 
   .about-badge { width: 200px; height: 200px; }
   .about-badge-num { font-size: 3.4rem; }

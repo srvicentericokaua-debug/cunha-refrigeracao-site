@@ -506,6 +506,24 @@ function initScrollspy() {
 }
 initScrollspy();
 
+// ---------- Float buttons: hide while hero is in view ----------
+// The hero has its own WhatsApp CTA already, and on phones its full-width
+// buttons sit in the same corner as these fixed buttons — hide them until
+// the hero scrolls out of view.
+function initFloatStackVisibility() {
+  const hero = document.querySelector(".hero");
+  const stack = document.querySelector(".float-stack");
+  if (!hero || !stack) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      stack.classList.toggle("is-hidden", entry.isIntersecting);
+    });
+  }, { threshold: 0.15 });
+
+  io.observe(hero);
+}
+initFloatStackVisibility();
 
 // ---------- Scroll progress bar ----------
 const scrollProgress = document.getElementById("scrollProgress");
