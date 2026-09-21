@@ -1,0 +1,13 @@
+# Reference material copied in during development — not part of the site
+skills claude/
+
+# Original/raw video — frames already extracted to public/frames/
+video/
+video scroll/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Vercel CLI local project link
+.vercel
